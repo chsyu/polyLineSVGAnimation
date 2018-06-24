@@ -81,7 +81,7 @@ let buildSVGPath = ($polyline, $path) => {
             // tweenChanges: true  //Smoothing effects which does not work for this case.
          })
          .setTween(tlPath)
-         .addIndicators()
+      //    .addIndicators()
          .addTo(controller);
 
 }
