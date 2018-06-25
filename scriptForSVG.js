@@ -1,6 +1,6 @@
 let buildSVGPath = ($polyline, $path, svgHeight) => {
 
-      function transformPolylineToPath(element) {
+      let transformPolylineToPath = (element) => {
             let newElement = {};
             newElement.debug = 'modified-polyline';
             let points = element.attr("points").split(' ');
@@ -13,7 +13,7 @@ let buildSVGPath = ($polyline, $path, svgHeight) => {
             return path;
       }
 
-      function pointsConverter(element) {
+      let pointsConverter = (element) => {
             let tmpPoints = new Array();
             let newPoints = new Array();
             let points = element.attr("points").split(' ');
@@ -30,10 +30,8 @@ let buildSVGPath = ($polyline, $path, svgHeight) => {
       }
 
       let path = transformPolylineToPath($polyline);
-      $path.attr("d", path);
       let pathPoints = pointsConverter($polyline);
-      let totalLength = 0,
-            sumRatio = 0;
+      let totalLength = 0, sumRatio = 0;
       let dX = [],dY = [], distance = [], drawRatio = [];
       let pathLength = pathPoints.length;
       for (let i = 1; i < pathLength; i++) {
@@ -42,6 +40,7 @@ let buildSVGPath = ($polyline, $path, svgHeight) => {
             distance[i] = Math.sqrt(dX[i] * dX[i] + dY[i] * dY[i]);
             totalLength += distance[i];
       }
+      $path.attr("d", path);
       $path.attr("stroke-dasharray", totalLength);
       $path.attr("stroke-dashoffset", totalLength);
 
