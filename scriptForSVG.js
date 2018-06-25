@@ -6,7 +6,9 @@ let buildSVGPath = ($polyline, $path, svgHeight) => {
          let points = element.attr("points").split(' ');
          let path = "M" + points[0];
          for (let i = 1; i < points.length; i++) {
-            path += "L" + points[i];
+            if(points[i]){
+                  path += "L" + points[i];
+            }
          }
          return path;
       }
@@ -17,10 +19,14 @@ let buildSVGPath = ($polyline, $path, svgHeight) => {
          let points = element.attr("points").split(' ');
          for (let i = 0; i < points.length; i++) {
             tmpPoints[i] = (points[i]).split(',');
-            newPoints[i] = {
-               "x": Number(tmpPoints[i][0]),
-               "y": Number(tmpPoints[i][1])
-            };
+            let numberX =  Number(tmpPoints[i][0]);
+            let numberY = Number(tmpPoints[i][1]);
+            if (numberY) {
+                  newPoints[i] = {
+                  "x": numberX,
+                  "y": numberY
+                  };
+            }
          }
          return newPoints;
       }
@@ -36,7 +42,6 @@ let buildSVGPath = ($polyline, $path, svgHeight) => {
          distance = [],
          drawRatio = [];
       let pathLength = pathPoints.length;
-
       for (let i = 1; i < pathLength; i++) {
          dX[i] = pathPoints[i].x - pathPoints[i - 1].x;
          dY[i] = pathPoints[i].y - pathPoints[i - 1].y;
@@ -46,14 +51,13 @@ let buildSVGPath = ($polyline, $path, svgHeight) => {
       for (let i = 1; i < pathLength; i++) {
          let dRatio = (distance[i] / totalLength * 5000);
          let yRatio = (dY[i] / pathPoints[pathLength - 1].y * 5000);
-         let ratio = Math.floor(dRatio / yRatio * 100) / 5000;
+         let ratio = Math.round(dRatio / yRatio * 100) / 5000;
          yRatio = Math.round(yRatio);
          for (let j = 0; j < yRatio; j++) {
             sumRatio = sumRatio + ratio;
             drawRatio.push(`${sumRatio}%`);
          }
       }
-
 
       // init controller
       var controller = new ScrollMagic.Controller();
