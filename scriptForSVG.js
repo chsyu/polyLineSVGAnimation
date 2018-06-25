@@ -74,9 +74,10 @@ let buildSVGPath = ($polyline, $path, svgHeight) => {
       };
 
       // Path Scene
-      var pathScene = new ScrollMagic.Scene({
+      let pathScene = new ScrollMagic.Scene({
                   triggerElement: "#wrapper", // set the start line element
                   triggerHook: 0.6, // set the trigger line position 
+                  reverse: false, //set the scene does not reverse play (default = true)
                   offset: 0, // offset the start line position
                   // when start line cross the trigger line, SVG line starts to draw
                   duration: svgHeight, // the scroll region beginning from the start line, which is relative to 0~100% SVG path and should be equal to the height of the SVG figure
