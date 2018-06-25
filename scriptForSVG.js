@@ -19,9 +19,9 @@ let buildSVGPath = ($polyline, $path, svgHeight) => {
          let points = element.attr("points").split(' ');
          for (let i = 0; i < points.length; i++) {
             tmpPoints[i] = (points[i]).split(',');
-            let numberX =  Number(tmpPoints[i][0]);
+            let numberX = Number(tmpPoints[i][0]);
             let numberY = Number(tmpPoints[i][1]);
-            if (numberY) {
+            if (numberY || numberX) {
                   newPoints[i] = {
                   "x": numberX,
                   "y": numberY
@@ -34,7 +34,6 @@ let buildSVGPath = ($polyline, $path, svgHeight) => {
       let path = transformPolylineToPath($polyline);
       $path.attr("d", path);
       let pathPoints = pointsConverter($polyline);
-
       let totalLength = 0,
          sumRatio = 0;
       let dX = [],
