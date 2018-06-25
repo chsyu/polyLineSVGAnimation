@@ -1,4 +1,4 @@
-let buildSVGPath = ($polyline, $path) => {
+let buildSVGPath = ($polyline, $path, svgHeight) => {
 
       function transformPolylineToPath(element) {
          let newElement = {};
@@ -77,7 +77,7 @@ let buildSVGPath = ($polyline, $path) => {
             triggerHook: 0.3, // set the trigger line position 
             offset: 0, // offset the start line position
             // when start line cross the trigger line, SVG line starts to draw
-            duration: 6157, // the scroll region beginning from the start line, which is relative to 0~100% SVG path and should be equal to the height of the SVG figure
+            duration: svgHeight, // the scroll region beginning from the start line, which is relative to 0~100% SVG path and should be equal to the height of the SVG figure
             // tweenChanges: true  //Smoothing effects which does not work for this case.
          })
          .setTween(tlPath)
