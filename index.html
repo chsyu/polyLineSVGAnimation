@@ -32,9 +32,10 @@
 <body>
    <div id="marginTop"></div>
    <div id="wrapper">
-      <svg width="1373px" height="6157.2px" xmlns="http://www.w3.org/2000/svg">
+      <svg  width="1448px"
+      height="5809.763px" viewBox="0 0 1448 5809.763" enable-background="new 0 0 1448 5809.763" xmlns="http://www.w3.org/2000/svg">
          <polyline id="polyline1" fill="none" stroke-width="2" stroke-miterlimit="10" 
-            points="43.755,0 43.755,1166.852 1336.885,1409.875 1336.885,3375.071 28.753,3645.098 28.753,4881.222 1312.882,5079.241 1312.882,5898.323 163.767,6021.335 163.767,6183.352 "/>
+            points="47.625,0 47.625,3331.306 1397.558,3442.3 1397.558,3889.276 56.624,4267.256 56.624,5831.671 	"/>
          <path id="path1" stroke="darkblue" stroke-width="2" fill="none" />
       </svg>
    </div>
@@ -42,7 +43,7 @@
    <script>
       let $polyline = $("polyline#polyline1");
       let $path = $("path#path1");
-      let svgHeight = 6157;
+      let svgHeight = $("svg").attr("height");
       buildSVGPath($polyline, $path, svgHeight);
    </script>
 </body>

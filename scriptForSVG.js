@@ -6,8 +6,9 @@ let buildSVGPath = ($polyline, $path, svgHeight) => {
          let points = element.attr("points").split(' ');
          let path = "M" + points[0];
          for (let i = 1; i < points.length; i++) {
-            if(points[i]){
+            if(points[i].includes(",")){
                   path += "L" + points[i];
+                  console.log(points[i]);
             }
          }
          return path;
@@ -19,12 +20,10 @@ let buildSVGPath = ($polyline, $path, svgHeight) => {
          let points = element.attr("points").split(' ');
          for (let i = 0; i < points.length; i++) {
             tmpPoints[i] = (points[i]).split(',');
-            let numberX = Number(tmpPoints[i][0]);
-            let numberY = Number(tmpPoints[i][1]);
-            if (numberY || numberX) {
+            if (tmpPoints[i].length == 2) {
                   newPoints[i] = {
-                  "x": numberX,
-                  "y": numberY
+                  "x": Number(tmpPoints[i][0]),
+                  "y": Number(tmpPoints[i][1])
                   };
             }
          }
@@ -34,6 +33,7 @@ let buildSVGPath = ($polyline, $path, svgHeight) => {
       let path = transformPolylineToPath($polyline);
       $path.attr("d", path);
       let pathPoints = pointsConverter($polyline);
+      console.log(pathPoints);
       let totalLength = 0,
          sumRatio = 0;
       let dX = [],
