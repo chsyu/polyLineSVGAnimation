@@ -44,7 +44,6 @@ let buildSVGPath = ($polyline, $path, svgHeight) => {
       $path.attr("stroke-dasharray", totalLength);
       $path.attr("stroke-dashoffset", totalLength);
 
-
       for (let i = 1; i < pathLength; i++) {
             let dRatio = (distance[i] * 5000);
             let yRatio = (dY[i] / pathPoints[pathLength - 1].y * 5000);
@@ -61,29 +60,23 @@ let buildSVGPath = ($polyline, $path, svgHeight) => {
 
       // build tween
       var tlPath = new TimelineMax();
-      tlPath.add(TweenLite.fromTo($path, 0.0001, {
-            strokeDashoffset: totalLength
-      }, {
-            strokeDashoffset: drawRatio[1]
-      }));
-      for (let i = 2; i < drawRatio.length; i++) {
+      drawRatio.map(offset => {
             tlPath.add(TweenLite.to($path, 0.0001, {
-                  strokeDashoffset: drawRatio[i]
+                  strokeDashoffset: offset
             }));
-      };
+      });
 
       // Path Scene
-      let pathScene = new ScrollMagic.Scene({
+      let pathScene = new ScrollMagic.Scene(
+            {
                   triggerElement: "#wrapper", // set the start line element
-                  triggerHook: 0.6, // set the trigger line position 
+                  triggerHook: 0.3, // set the trigger line position 
                   reverse: false, //set the scene does not reverse play (default = true)
                   offset: 0, // offset the start line position
                   // when start line cross the trigger line, SVG line starts to draw
                   duration: svgHeight, // the scroll region beginning from the start line, which is relative to 0~100% SVG path and should be equal to the height of the SVG figure
-                  // tweenChanges: true  //Smoothing effects which does not work for this case.
             })
             .setTween(tlPath)
-            //    .addIndicators()
             .addTo(controller);
 
 }
