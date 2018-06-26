@@ -1,9 +1,11 @@
 let buildSVGPath = ($polyline, $path, svgHeight) => {
 
       let transformPolylineToPath = (element) => {
-            let newElement = {};
-            newElement.debug = 'modified-polyline';
-            let points = element.attr("points").split(' ');
+            let points = element
+                        .attr("points")
+                        .replace(/\n/g, " ")
+                        .replace(/  +/g, ' ')
+                        .split(' ');
             let path = "M" + points[0];
             for (let i = 1; i < points.length; i++) {
                   if (points[i].includes(",")) {
@@ -16,7 +18,11 @@ let buildSVGPath = ($polyline, $path, svgHeight) => {
       let pointsConverter = (element) => {
             let tmpPoints = new Array();
             let newPoints = new Array();
-            let points = element.attr("points").split(' ');
+            let points = element
+                  .attr("points")
+                  .replace(/\n/g, " ")
+                  .replace(/  +/g, ' ')
+                  .split(' ');
             for (let i = 0; i < points.length; i++) {
                   tmpPoints[i] = (points[i]).split(',');
                   if (tmpPoints[i].length == 2) {
